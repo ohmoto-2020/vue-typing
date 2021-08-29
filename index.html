@@ -21,7 +21,7 @@
             <div class="question mb-20">{{current_question}}</div>
             <div class="clear">Clear!!</div>
             <div class="typeFormWrapper mb-20">
-                <input type="text" class="typeForm">
+                <input type="text" class="typeForm" v-model='typeBox'>
             </div>
 
             <div class="gaugeWapper mb-20">
@@ -44,6 +44,7 @@
                     'donut',
                     'espresso',
                 ],
+                typeBox: '',
             },
             methods: {
                 gameStart: function () {
@@ -52,6 +53,15 @@
             },
             mounted: function () {
                 this.current_question = this.questions[0]
+            },
+            watch: {
+                typeBox: function (e) {
+                    if (e == this.current_question) {
+                        this.questions.splice(0, 1)
+                        this.current_question = this.questions[0]
+                        this.typeBox = ''
+                    }
+                }
             }
         })
     </script>
