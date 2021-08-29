@@ -21,7 +21,7 @@
             <div class="question mb-20">{{current_question}}</div>
             <div class="clear" v-if='current_question_count == question_count'>Clear!!</div>
             <div class="typeFormWrapper mb-20">
-                <input type="text" class="typeForm" v-model='typeBox'>
+                <input id="typeForm" type="text" class="typeForm" v-model='typeBox'>
             </div>
 
             <div class="gaugeWapper mb-20">
@@ -61,11 +61,13 @@
                         'background-color': color
                     }
                 }
-
             },
             methods: {
                 gameStart: function () {
                     this.startFlag = true;
+                    this.$nextTick(function () {
+                        document.getElementById('typeForm').focus()
+                    })
                 },
             },
             mounted: function () {
