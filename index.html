@@ -18,7 +18,7 @@
         </div>
         <button v-if='startFlag!=true' class="startButton mb-20" @click='gameStart'>START</button>
         <div v-if='startFlag'>
-            <div class="question mb-20">apple</div>
+            <div class="question mb-20">{{current_question}}</div>
             <div class="clear">Clear!!</div>
             <div class="typeFormWrapper mb-20">
                 <input type="text" class="typeForm">
@@ -29,7 +29,6 @@
             </div>
             <div>1/5</div>
         </div>
-        <pre>{{$data}}</pre>
     </div>
 
     <script>
@@ -37,11 +36,22 @@
             el: '#app',
             data: {
                 startFlag: '',
+                current_question: '',
+                questions: [
+                    'apple',
+                    'banana',
+                    'chocolate',
+                    'donut',
+                    'espresso',
+                ],
             },
             methods: {
                 gameStart: function () {
                     this.startFlag = true;
-                }
+                },
+            },
+            mounted: function () {
+                this.current_question = this.questions[0]
             }
         })
     </script>
