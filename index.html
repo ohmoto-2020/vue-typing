@@ -25,7 +25,7 @@
             </div>
 
             <div class="gaugeWapper mb-20">
-                <div class="gauge"></div>
+                <div :style='styleObject' class="gauge"></div>
             </div>
             <div>{{current_question_count}}/{{question_count}}</div>
         </div>
@@ -47,6 +47,21 @@
                 typeBox: '',
                 current_question_count: 0,
                 question_count: 0
+            },
+            computed: {
+                styleObject: function () {
+                    width = 20 * this.current_question_count + '%'
+                    if (this.current_question_count == 5) {
+                        color = '#03a9f4'
+                    } else {
+                        color = 'orange'
+                    }
+                    return {
+                        'width': width,
+                        'background-color': color
+                    }
+                }
+
             },
             methods: {
                 gameStart: function () {
