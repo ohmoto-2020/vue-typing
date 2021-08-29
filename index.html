@@ -16,19 +16,18 @@
             <h1>Typing Game</h1>
             <div class="marker"></div>
         </div>
-        <button v-if='startFlag!=true' class="startButton mb-20" @click='gameStart'>START</button>
-        <div v-if='startFlag'>
+        <button v-if='!startFlag' class="startButton mb-20" @click='gameStart'>START</button>
+        <div v-if='startFlag && !clear'>
             <div class="question mb-20">{{current_question}}</div>
-            <div class="clear" v-if='current_question_count == question_count'>Clear!!</div>
             <div class="typeFormWrapper mb-20">
                 <input id="typeForm" type="text" class="typeForm" v-model='typeBox'>
             </div>
-
             <div class="gaugeWapper mb-20">
                 <div :style='styleObject' class="gauge"></div>
             </div>
             <div>{{current_question_count}}/{{question_count}}</div>
         </div>
+        <div class="clear" v-if='clear'>CLEAR!!</div>
     </div>
 
     <script>
@@ -46,7 +45,8 @@
                 ],
                 typeBox: '',
                 current_question_count: 0,
-                question_count: 0
+                question_count: 0,
+                clear: false,
             },
             computed: {
                 styleObject: function () {
@@ -81,8 +81,11 @@
                         this.current_question = this.questions[0]
                         this.typeBox = ''
                         this.current_question_count = this.current_question_count + 1
+                        if (this.current_question_count == this.question_count) {
+                            this.clear = true
+                        }
                     }
-                }
+                },
             }
         })
     </script>
